@@ -7,7 +7,7 @@
   "author": "Alex Carol",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexcarol/astro-kit",
+    "url": "git+https://github.com/alexcarol/astro-kit.git",
     "directory": "packages/astro-llms-txt"
   },
   "keywords": [
