@@ -1,0 +1,40 @@
+{
+  "name": "@alexcarol/astro-llms-txt",
+  "version": "0.1.0",
+  "description": "Astro integration that generates llms.txt and llms-full.txt at build time",
+  "type": "module",
+  "license": "MIT",
+  "author": "Alex Carol",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexcarol/astro-kit",
+    "directory": "packages/astro-llms-txt"
+  },
+  "keywords": [
+    "astro-integration",
+    "withastro",
+    "llms-txt",
+    "llms",
+    "ai",
+    "seo"
+  ],
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "node-html-parser": "^7.0.0",
+    "turndown": "^7.2.2"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.0"
+  },
+  "scripts": {
+    "test": "vitest run"
+  }
+}
