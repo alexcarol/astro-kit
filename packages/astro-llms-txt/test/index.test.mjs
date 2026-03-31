@@ -1,7 +1,8 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { writeFile, mkdir, rm } from 'node:fs/promises';
-import { join } from 'node:path';
+import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
+import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
+import { fileURLToPath } from 'node:url';
 import { parse } from 'node-html-parser';
 import llmsTxt, { htmlToMarkdown, extractPage, formatIndex, formatFull, collectPages } from '../src/index.mjs';
 
@@ -500,5 +501,39 @@ describe('llmsTxt', () => {
       expect(idx).not.toContain('404');
       expect(idx).toContain('[Home]');
     });
+  });
+});
+
+// -- astro add compatibility --
+
+describe('astro add compatibility', () => {
+  const pkgPath = join(
+    dirname(fileURLToPath(import.meta.url)),
+    '..',
+    'package.json',
+  );
+
+  it('package.json has required astro-integration keyword', async () => {
+    const pkg = JSON.parse(await readFile(pkgPath, 'utf-8'));
+    expect(pkg.keywords).toContain('astro-integration');
+  });
+
+  it('package.json has withastro keyword for directory discovery', async () => {
+    const pkg = JSON.parse(await readFile(pkgPath, 'utf-8'));
+    expect(pkg.keywords).toContain('withastro');
+  });
+
+  it('default export is a callable that returns a valid integration', () => {
+    expect(llmsTxt).toBeTypeOf('function');
+    const integration = llmsTxt();
+    expect(integration).toHaveProperty('name');
+    expect(integration).toHaveProperty('hooks');
+    expect(integration.hooks).toHaveProperty('astro:config:done');
+    expect(integration.hooks).toHaveProperty('astro:build:done');
+  });
+
+  it('package.json exports "." entry point', async () => {
+    const pkg = JSON.parse(await readFile(pkgPath, 'utf-8'));
+    expect(pkg.exports['.']).toBeDefined();
   });
 });

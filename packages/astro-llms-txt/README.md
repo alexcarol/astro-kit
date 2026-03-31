@@ -9,15 +9,26 @@ time by reading your rendered HTML output.
 ## Install
 
 ```bash
-npm install astro-llms-txt
+npx astro add @alexcarol/astro-llms-txt
+```
+
+> **Note:** `astro add` will auto-generate the import name `alexcarolllmsTxt` from the scoped
+> package name. You may want to rename it to `llmsTxt` for readability.
+
+Or install manually:
+
+```bash
+npm install @alexcarol/astro-llms-txt
 ```
 
 ## Quick start
 
+If you used `astro add`, your config is already set up. Otherwise, add the integration manually:
+
 ```js
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
-import llmsTxt from 'astro-llms-txt';
+import llmsTxt from '@alexcarol/astro-llms-txt';
 
 export default defineConfig({
   site: 'https://example.com', // required
