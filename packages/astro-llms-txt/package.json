@@ -28,7 +28,7 @@
     "node": ">=22"
   },
   "dependencies": {
-    "node-html-parser": "^7.0.0",
+    "node-html-parser": "^8.0.0",
     "turndown": "^7.2.2"
   },
   "devDependencies": {
